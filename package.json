@@ -14,7 +14,8 @@
     "lint": "eslint src",
     "lint:fix": "npm run lint --fix",
     "format": "prettier --write \"**/*.ts\"",
-    "format:check": "prettier --list-different \"**/*.ts\""
+    "format:check": "prettier --list-different \"**/*.ts\"",
+    "clean": "pnpm rimraf node_modules && pnpm rimraf dist"
   },
   "keywords": [
     "langchain",
@@ -28,8 +29,13 @@
   "license": "MIT",
   "dependencies": {
     "dotenv": "^16.0.3",
-    "langchain": "^0.0.39",
-    "tsup": "^6.7.0"
+    "fetch-socks": "^1.2.0",
+    "langchain": "0.0.59",
+    "mysql2": "^3.3.3",
+    "sqlite3": "^5.1.6",
+    "tsup": "^6.7.0",
+    "typeorm": "^0.3.16",
+    "undici": "^5.22.1"
   },
   "devDependencies": {
     "@tsconfig/recommended": "^1.0.2",

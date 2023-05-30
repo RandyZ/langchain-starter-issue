@@ -1,15 +1,17 @@
-import * as dotenv from "dotenv";
-import { OpenAI } from "langchain";
+import * as dotenv from 'dotenv';
+import { setGlobalDispatcher, ProxyAgent } from 'undici';
+import { run as run1 } from './script/script1.ts';
+import { run as run2 } from './script/script2.ts';
 
 dotenv.config();
+const proxyAgent = new ProxyAgent('http://172.16.5.147:30010');
+// const proxyAgent = new ProxyAgent('http://127.0.0.1:10887');
+setGlobalDispatcher(proxyAgent);
 
-const model = new OpenAI({
-  modelName: "gpt-3.5-turbo",
-  openAIApiKey: process.env.OPENAI_API_KEY,
-});
+const apiKey = process.env.OPENAI_API_KEY;
+if (!apiKey) {
+  throw new Error('OPENAI_API_KEY is not set');
+}
 
-const res = await model.call(
-  "What's a good idea for an application to build with GPT-3?"
-);
-
-console.log(res);
+// await run1(apiKey);
+await run2(apiKey);
